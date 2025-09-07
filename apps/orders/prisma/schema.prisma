@@ -1,0 +1,11 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id                Int        @id @default(autoincrement())
+  order_date        DateTime
+  shipping_adress   String
+  product_id        Int
+}
