@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 @Injectable()
 export class ConsulService implements OnModuleDestroy {
   private readonly consul;
-  private readonly serviceName = 'orders-service';
+  private readonly serviceName = 'products-service';
   private readonly instanceId = `${this.serviceName}-${randomUUID()}`;
   private instancePort: number;
 
@@ -21,7 +21,7 @@ export class ConsulService implements OnModuleDestroy {
       port: this.instancePort,
       address: 'host.docker.internal',
       check: {
-        http: `http://host.docker.internal:${this.instancePort}/orders/health`,
+        http: `http://host.docker.internal:${this.instancePort}/products/health`,
         interval: '10s',
         timeout: '5s',
       },

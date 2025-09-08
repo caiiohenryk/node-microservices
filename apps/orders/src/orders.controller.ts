@@ -11,6 +11,6 @@ export class OrdersController {
 
   @Get('test')
   async test() {
-    return { message: 'Funcionando!' }
+    return { message: 'Products service is healthy' }
   }
 }

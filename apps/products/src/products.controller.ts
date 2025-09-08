@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
-@Controller()
+@Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Get()
-  getHello(): string {
-    return this.productsService.getHello();
+  @Get('health')
+  async checkHealth() {
+    return { status: 'ok' };
   }
 }
