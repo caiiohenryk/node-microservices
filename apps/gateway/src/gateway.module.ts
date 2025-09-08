@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GatewayController } from './gateway.controller';
-import { GatewayService } from './gateway.service';
+import { HttpModule } from '@nestjs/axios';
+import { ConsulModule } from './consul/consul.module';
 
 @Module({
-  imports: [],
+  imports: [HttpModule.register({ timeout: 5000 }), ConsulModule ],
   controllers: [GatewayController],
-  providers: [GatewayService],
 })
 export class GatewayModule {}

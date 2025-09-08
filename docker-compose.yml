@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   # Service Registry
   consul:
-    image: consul:latest
+    image: hashicorp/consul:latest
     container_name: consul
     ports:
       - "8500:8500" # UI e HTTP API
