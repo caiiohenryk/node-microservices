@@ -3,9 +3,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma-client-orders"
+}
+
 model Order {
   id                Int        @id @default(autoincrement())
   order_date        DateTime
   shipping_adress   String
+  product_quantity  Int
   product_id        Int
+  total_price       Float
 }
