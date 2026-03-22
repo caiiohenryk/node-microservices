@@ -10,7 +10,10 @@ export class ConsulService implements OnModuleDestroy {
   private instancePort: number;
 
   constructor() {
-    this.consul = new Consul({ host: 'localhost', port: 8500 });
+    this.consul = new Consul({
+      host: process.env.CONSUL_HOST || 'localhost',
+      port: Number(process.env.CONSUL_PORT || '8500'),
+    });
   }
 
   async registerService(port: number) {

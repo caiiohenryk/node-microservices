@@ -4,7 +4,7 @@ import { HttpModule } from '@nestjs/axios';
 import { ConsulModule } from './consul/consul.module';
 
 @Module({
-  imports: [HttpModule.register({ timeout: 5000 }), ConsulModule ],
+  imports: [HttpModule.register({ timeout: 5000 }), ConsulModule],
   controllers: [GatewayController],
 })
 export class GatewayModule {}

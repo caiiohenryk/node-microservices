@@ -1,7 +1,6 @@
-import { IsInt, IsNotEmpty, IsString, Min } from "class-validator";
+import { IsInt, IsNotEmpty, IsString, Min, MinLength } from 'class-validator';
 
 export class CreateOrderDTO {
-
     @IsInt({ message: 'productId must be an integer.' })
     @IsNotEmpty({ message: 'productId is required.' })
     productId: number;
@@ -12,8 +11,9 @@ export class CreateOrderDTO {
     quantity: number;
 
     @IsString({ message: 'shippingAddress must be a string.' })
-    @Min(5, { message: 'shippingAddress must be at least 5 characters long.' })
+    @MinLength(5, {
+        message: 'shippingAddress must be at least 5 characters long.',
+    })
     @IsNotEmpty({ message: 'shippingAddress is required.' })
     shippingAddress: string;
-    
 }

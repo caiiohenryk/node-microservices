@@ -5,14 +5,10 @@ import { CreateOrderDTO } from './shared/dtos/order.request.dto';
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
+
   @Get('health')
   healthCheck() {
     return { status: 'ok' };
-  }
-
-  @Get('test')
-  async test() {
-    return { message: 'Products service is healthy' }
   }
 
   @Post()

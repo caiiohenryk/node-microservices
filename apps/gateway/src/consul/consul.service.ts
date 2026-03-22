@@ -6,7 +6,10 @@ export class ConsulService {
   private readonly consul;
 
   constructor() {
-    this.consul = new Consul({ host: 'localhost', port: 8500 });
+    this.consul = new Consul({
+      host: process.env.CONSUL_HOST || 'localhost',
+      port: Number(process.env.CONSUL_PORT || '8500'),
+    });
   }
 
   async discoverService(
@@ -23,6 +26,11 @@ export class ConsulService {
 
     const serviceInstance =
       services[Math.floor(Math.random() * services.length)];
+
+    if (!serviceInstance?.Service?.Address || !serviceInstance?.Service?.Port) {
+      return null;
+    }
+
     return serviceInstance.Service;
   }
 }

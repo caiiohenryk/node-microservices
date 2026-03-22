@@ -1,11 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { OrdersModule } from './orders.module';
 import { ConsulService } from './consul/consul.service';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(OrdersModule);
 
-  await app.listen(0); // Inicia em porta randômica
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+
+  await app.listen(0);
 
   const server = app.getHttpServer();
   const address = server.address();
@@ -15,8 +24,8 @@ async function bootstrap() {
   const port = address.port;
 
   const consulService = app.get(ConsulService);
-  await consulService.registerService(port); // Registra no Consul
+  await consulService.registerService(port);
 
-  app.enableShutdownHooks(); // Habilita o onModuleDestroy
+  app.enableShutdownHooks();
 }
 bootstrap();
